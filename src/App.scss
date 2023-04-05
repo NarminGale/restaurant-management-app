@@ -1,0 +1,7 @@
+@import "./assets/styles/variables";
+@import "./assets/styles/mixins";
+
+.butto-click {
+  background-color: $background-color;
+  color: $text-color;
+}
