@@ -1,0 +1,66 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+.sidebar {
+  height: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  &--item {
+    color: $text-color;
+    font-size: 1.1rem;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: #301649;
+      background: $background-color;
+      font-weight: bold;
+
+      .icon-box {
+        transition: all 0.3s ease-in;
+        background-color: rgba(48, 22, 73, 0.5);
+        box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+
+        img {
+          filter: invert(1);
+        }
+      }
+
+      .right-arrow {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  .icon-box {
+    height: 35px;
+    width: 35px;
+    @include align-center;
+
+    img {
+      height: 20px;
+      width: 20px;
+      object-fit: cover;
+    }
+  }
+
+  .right-arrow {
+    height: 30px;
+    width: 30px;
+    opacity: 0;
+    visibility: hidden;
+    @include align-center;
+    transition: all 0.3s ease-out;
+    filter: invert(7%) sepia(52%) saturate(4057%) hue-rotate(262deg)
+      brightness(98%) contrast(93%);
+
+    img {
+      color: red;
+      height: 12px;
+      width: 12px;
+      object-fit: cover;
+    }
+  }
+}
