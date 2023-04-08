@@ -5,9 +5,11 @@ import { Col, Container, Row } from "react-bootstrap";
 
 import Home from "../pages/Home";
 import Menu from "../pages/Menu";
+import Order from "../pages/Order";
 import Orders from "../pages/Orders";
-import Dashboard from "../pages/Dashboard";
+import NewOrder from "../pages/NewOrder";
 import Header from "../components/Header";
+import Dashboard from "../pages/Dashboard";
 import Sidebar from "../components/Sidebar";
 
 export default function App() {
@@ -25,6 +27,9 @@ export default function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:orderId" element={<Order />} />
+              <Route path="/orders/:orderId" element={<Order />} />
+              <Route path="/orders/new" element={<NewOrder />} />
             </Routes>
           </Col>
         </Row>

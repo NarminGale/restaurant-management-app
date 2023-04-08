@@ -1,0 +1,15 @@
+@import "../../../assets/styles/variables";
+
+.custom-form-select {
+  box-shadow: $input-box-shadow;
+  border: 1px solid transparent;
+
+  &:focus-visible {
+    outline: none;
+    border-color: gray;
+  }
+
+  &.border-danger {
+    border-color: red;
+  }
+}
