@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
-import { ordersData } from "../../common/utils/constants";
+import { useGetOrdersQuery } from "../../services/ordersSlice/ordersSlice";
 
 const getStatusButtonVariant = (status) => {
   switch (status) {
@@ -20,6 +20,8 @@ const getStatusButtonVariant = (status) => {
 };
 
 export default function DataTable() {
+  const { data: orders } = useGetOrdersQuery();
+
   return (
     <Table bordered hover className="data-table">
       <thead className="data-table--header">
@@ -34,29 +36,45 @@ export default function DataTable() {
         </tr>
       </thead>
       <tbody>
-        {ordersData.map((order) => (
-          <tr key={order.id}>
-            <td className="fw-bold ps-4">{order.id}</td>
-            <td>{order.tableNumber}</td>
-            <td>{order.waiter}</td>
-            <td>
-              <Button
-                size="sm"
-                variant={getStatusButtonVariant(order.status)}
-                className="border-0 status-btn"
-              >
-                {order.status}
-              </Button>
-            </td>
-            <td>${order.amount}</td>
-            <td>{order.deliveredDate}</td>
-            <td className="fw-bold pe-4">
-              <Link to={`/orders/${order.id}`} className="text-decoration-none">
-                <Button className="w-100 info-btn border-0">More</Button>
-              </Link>
-            </td>
-          </tr>
-        ))}
+        {orders?.map((order) => {
+          // calculate total amount
+          console.log(order, "order");
+
+          const totalAmount = order?.orderItems?.reduce((acc, item) => {
+            return acc + item.price * item.quantity;
+          }, 0);
+
+          console.log(totalAmount, "totalAmount");
+
+          return (
+            <tr key={order.id}>
+              <td className="fw-bold ps-4">{order.id}</td>
+              <td>{order.tableNumber}</td>
+              <td>{order.waiter}</td>
+              <td>
+                <Button
+                  size="sm"
+                  variant={getStatusButtonVariant(order.status)}
+                  className="border-0 status-btn"
+                >
+                  {order.status}
+                </Button>
+              </td>
+              <td>${totalAmount}</td>
+              <td>
+                {order.deliveryTime === "" ? "----------" : order.deliveryTime}
+              </td>
+              <td className="fw-bold pe-4">
+                <Link
+                  to={`/orders/${order.id}`}
+                  className="text-decoration-none"
+                >
+                  <Button className="w-100 info-btn border-0">More</Button>
+                </Link>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </Table>
   );

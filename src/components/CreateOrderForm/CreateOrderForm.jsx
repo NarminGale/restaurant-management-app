@@ -8,15 +8,21 @@ import FormButton from "../form/FormButton";
 import FormSelectBox from "../form/FormSelectBox";
 import { useGetWaitersQuery } from "../../services/waitersSlice/waitersSlice";
 import { useGetTableNumbersQuery } from "../../services/tableNumbersSlice/tableNumbersSlice";
-export default function CreateOrderForm() {
+import { useAddOrderMutation } from "../../services/ordersSlice/ordersSlice";
+export default function CreateOrderForm({ handleShowCreateOrder }) {
   const {
     control,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const { data: waiters } = useGetWaitersQuery();
   const { data: tableNumbers } = useGetTableNumbersQuery();
+  const [addOrder] = useAddOrderMutation();
+
+  const NameSelectBox = watch("NameSelectBox");
+  const TableNumSelectBox = watch("TableNumSelectBox");
 
   const formInputData = [
     {
@@ -32,8 +38,24 @@ export default function CreateOrderForm() {
       requiredText: "Table number is required",
     },
   ];
-
+  /*
+  console.log(TableNumSelectBox, "TableNumSelectBox");
+  console.log(NameSelectBox, "NameSelectBox");*/
   const onSubmit = (data) => {
+    if (!NameSelectBox || !TableNumSelectBox) return;
+
+    const newOrder = {
+      waiter: NameSelectBox,
+      tableNumber: TableNumSelectBox,
+      // status: "Pending",
+      // amount: 0.0,
+      // deliveredDate: new Date().toISOString(),
+    };
+
+    addOrder(newOrder);
+
+    handleShowCreateOrder(false);
+
     console.log(data, "data");
   };
 

@@ -85,6 +85,94 @@
       ]
     }
   ],
+  "orders": [
+    {
+      "id": 1,
+      "tableNumber": 8,
+      "waiter": "Michael",
+      "status": "Delivered",
+      "deliveryTime": "2020-12-12T12:00:00.000Z",
+      "orderItems": [
+        {
+          "mealName": "Chicken with Mushroom Sauce",
+          "price": 14.5,
+          "quantity": 2
+        },
+        {
+          "mealName": "Chicken Roll",
+          "price": 11.5,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "tableNumber": 11,
+      "waiter": "Sophia",
+      "status": "Pending",
+      "deliveryTime": "",
+      "orderItems": [
+        {
+          "mealName": "Chicken Roll",
+          "price": 11.5,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "tableNumber": 4,
+      "waiter": "Juan",
+      "status": "Cancelled",
+      "deliveryTime": "",
+      "orderItems": [
+        {
+          "mealName": "Chicken Roll",
+          "price": 11.5,
+          "quantity": 1
+        },
+        {
+          "mealName": "Meat Fajitas",
+          "price": 22.5,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "tableNumber": 15,
+      "waiter": "Emily",
+      "status": "Delivered",
+      "deliveryTime": "2020-12-12T12:12:00.000Z",
+      "orderItems": [
+        {
+          "mealName": "Meat Fajitas",
+          "price": 22.5,
+          "quantity": 2
+        },
+        {
+          "mealName": "Chicken Roll",
+          "price": 11.5,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "waiter": "Sophia",
+      "tableNumber": "7",
+      "id": 5
+    },
+    {
+      "waiter": "Sophia",
+      "tableNumber": "6",
+      "id": 6
+    },
+    {
+      "waiter": "Miguel",
+      "tableNumber": "20",
+      "id": 7
+    }
+  ],
   "waiters": [
     "Michael",
     "Sophia",
@@ -98,6 +186,25 @@
     "Gabriella"
   ],
   "tableNumbers": [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
   ]
 }

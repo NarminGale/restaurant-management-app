@@ -3,6 +3,7 @@ import { waitersApi } from "../services/waitersSlice/waitersSlice";
 import { pageTitleSlice } from "../features/pageTitle/pageTitleSlice";
 import { menuCategoryApi } from "../services/menuCatalogSlice/menuCatSlice";
 import { tableNumbersApi } from "../services/tableNumbersSlice/tableNumbersSlice";
+import { ordersApi } from "../services/ordersSlice/ordersSlice";
 // import other feature reducers as needed
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   [menuCategoryApi.reducerPath]: menuCategoryApi.reducer,
   [waitersApi.reducerPath]: waitersApi.reducer,
   [tableNumbersApi.reducerPath]: tableNumbersApi.reducer,
+  [ordersApi.reducerPath]: ordersApi.reducer,
 
   // add other feature reducers as needed
 });

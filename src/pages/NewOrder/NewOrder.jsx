@@ -6,8 +6,13 @@ import { Col, Container, Row } from "react-bootstrap";
 import CreateOrderForm from "../../components/CreateOrderForm";
 import AddOrderForm from "../../components/AddOrderForm";
 import arrowLeft from "../../assets/svg-icons/arrow-left.svg";
+import { useState } from "react";
 
 export default function NewOrder() {
+  const [showCreateOrder, setShowCreateOrder] = useState(true);
+
+  const handleShowCreateOrder = (flag) => setShowCreateOrder(flag);
+
   return (
     <Container className="px-5 py-4 d-flex flex-column gap-5">
       <Row>
@@ -29,8 +34,11 @@ export default function NewOrder() {
       </Row>
       <Row>
         <Col>
-          <AddOrderForm />
-          {/*<CreateOrderForm />*/}
+          {showCreateOrder ? (
+            <CreateOrderForm handleShowCreateOrder={handleShowCreateOrder} />
+          ) : (
+            <AddOrderForm />
+          )}
         </Col>
       </Row>
     </Container>
