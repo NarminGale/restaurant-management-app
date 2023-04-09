@@ -1,0 +1,103 @@
+{
+  "menuCategories": [
+    {
+      "id": 1,
+      "name": "Hot Dishes",
+      "meals": [
+        {
+          "name": "Chicken with Mushroom Sauce",
+          "price": 14.5,
+          "imgUrl": "/images/TOYUQ_GBLK_SOUSU.jpg"
+        },
+        {
+          "name": "Chicken Roll",
+          "price": 11.5,
+          "imgUrl": "/images/TOYUQ_RULET.jpg"
+        },
+        {
+          "name": "Meat Fajitas",
+          "price": 22.5,
+          "imgUrl": "/images/TL_FAJTAS.jpg"
+        },
+        {
+          "name": "Mixed Meatballs",
+          "price": 14.5,
+          "imgUrl": "/images/Qarq_Kfte.jpg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Soups",
+      "meals": [
+        {
+          "name": "Tomato Soup",
+          "price": 6,
+          "imgUrl": "/images/pomidor-shorbasi.jpg"
+        },
+        {
+          "name": "Lentil Soup",
+          "price": 5.5,
+          "imgUrl": "/images/merci-shorbasi.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Salads",
+      "meals": [
+        {
+          "name": "Caesar Salad",
+          "price": 12,
+          "imgUrl": "/images/Sezar_salat.jpg"
+        },
+        {
+          "name": "Steyk Salad",
+          "price": 12.5,
+          "imgUrl": "/images/Steyk_salat.jpg"
+        },
+        {
+          "name": "Chicken Salad",
+          "price": 7.5,
+          "imgUrl": "/images/Toyuq_salat.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Kebab",
+      "meals": [
+        {
+          "name": "Chicken Wins Kebab",
+          "price": 8.5,
+          "imgUrl": "/images/TOYUQ_QANAD_KABABI.jpg"
+        },
+        {
+          "name": "Lamb kebab",
+          "price": 12,
+          "imgUrl": "/images/QUZU_KABAB.jpg"
+        },
+        {
+          "name": "Beef shish kebab",
+          "price": 17.5,
+          "imgUrl": "/images/DANA__KABAB.jpg"
+        }
+      ]
+    }
+  ],
+  "waiters": [
+    "Michael",
+    "Sophia",
+    "Juan",
+    "Emily",
+    "David",
+    "Isabella",
+    "Miguel",
+    "Samantha",
+    "Alex",
+    "Gabriella"
+  ],
+  "tableNumbers": [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+  ]
+}
