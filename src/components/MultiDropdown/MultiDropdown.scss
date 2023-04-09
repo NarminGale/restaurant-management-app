@@ -1,0 +1,16 @@
+.custom-form-select.border-danger:focus {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+.custom-form-select.border-danger,
+.custom-form-select.border-danger:focus {
+  .css-t3ipsp-control {
+    box-shadow: none !important;
+    border-color: #dc3545 !important;
+
+    &:hover {
+      border-color: #dc3545 !important;
+    }
+  }
+}
