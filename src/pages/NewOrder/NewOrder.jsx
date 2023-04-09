@@ -1,8 +1,10 @@
 import "./NewOrder.scss";
+
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 
 import CreateOrderForm from "../../components/CreateOrderForm";
+import AddOrderForm from "../../components/AddOrderForm";
 import arrowLeft from "../../assets/svg-icons/arrow-left.svg";
 
 export default function NewOrder() {
@@ -27,8 +29,8 @@ export default function NewOrder() {
       </Row>
       <Row>
         <Col>
-          {/*<AddOrderForm />*/}
-          <CreateOrderForm />
+          <AddOrderForm />
+          {/*<CreateOrderForm />*/}
         </Col>
       </Row>
     </Container>

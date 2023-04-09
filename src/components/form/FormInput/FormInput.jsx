@@ -1,8 +1,10 @@
-import "./FormInputText.scss";
+import "./FormInput.scss";
 
-import { Controller } from "react-hook-form";
 import cn from "classnames";
-export default function FormInputText({
+import { Controller } from "react-hook-form";
+
+export default function FormInput({
+  type = "text",
   control,
   errors,
   controllerName,
@@ -25,9 +27,12 @@ export default function FormInputText({
           message: "Table number must be greater than zero",
         },
       }}
+      onInput={([selected]) => {
+        console.log(selected, "selected number");
+      }}
       render={({ field }) => (
         <input
-          type="text"
+          type={type}
           id="number"
           className={cn("custom-form-select rounded-1 px-3 py-2 w-100", {
             "border-danger": errors[controllerName],

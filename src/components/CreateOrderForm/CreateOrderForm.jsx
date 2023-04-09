@@ -3,9 +3,11 @@ import "./CreateOrderForm.scss";
 import { useForm } from "react-hook-form";
 
 import FormLabel from "../form/FormLabel";
-import FormSelectBox from "../form/FormSelectBox";
 import FormError from "../form/FormError";
 import FormButton from "../form/FormButton";
+import FormSelectBox from "../form/FormSelectBox";
+import { useGetWaitersQuery } from "../../services/waitersSlice/waitersSlice";
+import { useGetTableNumbersQuery } from "../../services/tableNumbersSlice/tableNumbersSlice";
 export default function CreateOrderForm() {
   const {
     control,
@@ -13,28 +15,27 @@ export default function CreateOrderForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(errors, "errors");
-    console.log(data, "data");
-  };
-
-  const nameOptions = ["Selen", "Jane", "John"];
-  const tableOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const { data: waiters } = useGetWaitersQuery();
+  const { data: tableNumbers } = useGetTableNumbersQuery();
 
   const formInputData = [
     {
       label: "Waiter name",
       controllerName: "NameSelectBox",
-      options: nameOptions,
+      options: waiters,
       requiredText: "Waiter name is required",
     },
     {
       label: "Table number",
       controllerName: "TableNumSelectBox",
-      options: tableOptions,
+      options: tableNumbers,
       requiredText: "Table number is required",
     },
   ];
+
+  const onSubmit = (data) => {
+    console.log(data, "data");
+  };
 
   return (
     <form
