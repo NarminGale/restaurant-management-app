@@ -10,7 +10,7 @@ export default function Orders() {
   const newOrderUrl = `${url}/new`;
 
   return (
-    <Container className="px-5 py-4">
+    <Container className="py-3">
       <Row>
         <Col>
           <div className="d-flex justify-content-end align-items-end mb-4">

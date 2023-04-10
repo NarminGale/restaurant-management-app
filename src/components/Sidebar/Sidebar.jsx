@@ -16,7 +16,10 @@ export default function SidebarMenu() {
     dispatch(pageTitleSlice.actions.setTitle(title));
 
   return (
-    <Navbar className="sidebar bg-white flex-column align-items-start p-4">
+    <Navbar
+      className="sidebar position-fixed top-0 bottom-0 start-0 bg-body flex-column p-4"
+      fixed="left"
+    >
       <Navbar.Brand href="/" className="align-self-center fw-bold fs-3">
         ALGO-TASK
       </Navbar.Brand>

@@ -14,26 +14,27 @@ import Sidebar from "../components/Sidebar";
 
 export default function App() {
   return (
-    <div className="App vh-100">
-      <Container fluid className="h-100">
-        <Row className="h-100">
-          <Col sm={5} md={4} lg={3} xxl={2} className="px-0">
-            <Sidebar />
-          </Col>
-          <Col sm={7} md={8} lg={9} xxl={10} className="px-0">
+    <Container fluid className="App vh-100">
+      <Row className="vh-100">
+        <Col sm={5} md={4} lg={3} xl={3} xxl={2}>
+          <Sidebar />
+        </Col>
+        <Col sm={7} md={8} lg={9} xl={9} xxl={10} className="px-0">
+          <div className="px-5 py-4 bg-body">
             <Header />
+          </div>
+          <div className="px-5 py-4 main-body">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/orders/:orderId" element={<Order />} />
-              <Route path="/orders/:orderId" element={<Order />} />
               <Route path="/orders/new" element={<NewOrder />} />
             </Routes>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }

@@ -1,7 +1,8 @@
 @import "../assets/styles/variables";
 @import "../assets/styles/mixins";
 
-.App {
+.App,
+.main-body {
   color: $text-color;
   background-color: $background-color;
 }

@@ -1,10 +1,11 @@
+import { useState } from "react";
+
 import MenuCard from "../../components/MenuCard";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import {
   useGetCategoryMealsQuery,
   useGetMenuCategoriesQuery,
 } from "../../services/menuCatalogSlice/menuCatSlice";
-import { useState } from "react";
 
 export default function Menu() {
   const [selectedCategory, setSelectedCategory] = useState(1);
@@ -30,13 +31,17 @@ export default function Menu() {
   }
 
   return (
-    <Container className="py-5 px-4">
+    <Container className="py-1">
       <Row>
         <Col>
           <div className="d-flex flex-wrap justify-content-evenly align-items-center mb-5">
             {categories?.map((category) => (
               <Button
-                variant="outline-warning"
+                variant={
+                  selectedCategory === category.id
+                    ? "warning"
+                    : "outline-warning"
+                }
                 key={category.id}
                 className="text-black"
                 onClick={() => setSelectedCategory(category.id)}
@@ -50,7 +55,7 @@ export default function Menu() {
 
       <Row>
         {categoryMeals?.meals.map((meal) => (
-          <Col>
+          <Col xs={12} sm={12} md={12} lg={6} xl={4} xxl={3} className="px-3">
             <MenuCard meal={meal} />
           </Col>
         ))}

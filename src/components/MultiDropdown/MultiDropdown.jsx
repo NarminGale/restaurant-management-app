@@ -9,6 +9,7 @@ import { useGetMenuCategoriesQuery } from "../../services/menuCatalogSlice/menuC
 export default function MultiDropdown({
   control,
   errors,
+  defaultValue = "",
   controllerName,
   requiredText = "This field is required",
 }) {
@@ -33,6 +34,7 @@ export default function MultiDropdown({
     <Controller
       name={controllerName}
       control={control}
+      defaultValue={defaultValue}
       rules={{ required: requiredText }}
       render={({ field }) => {
         const selectedOption = flattenedOptions?.find(
@@ -44,6 +46,7 @@ export default function MultiDropdown({
             {...field}
             value={selectedOption}
             options={options}
+            isClearable={true}
             placeholder="Select an option"
             className={cn("custom-form-select rounded-1", {
               "border-danger": errors[controllerName],

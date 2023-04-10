@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
 import { useGetOrdersQuery } from "../../services/ordersSlice/ordersSlice";
+import { formattedDate } from "../../common/utils/helpers";
 
 const getStatusButtonVariant = (status) => {
   switch (status) {
@@ -37,14 +38,11 @@ export default function DataTable() {
       </thead>
       <tbody>
         {orders?.map((order) => {
-          // calculate total amount
-          console.log(order, "order");
-
           const totalAmount = order?.orderItems?.reduce((acc, item) => {
-            return acc + item.price * item.quantity;
+            return acc + item.amount;
           }, 0);
 
-          console.log(totalAmount, "totalAmount");
+          console.log(totalAmount, "totalAmount", order.deliveredDate);
 
           return (
             <tr key={order.id}>
@@ -60,9 +58,11 @@ export default function DataTable() {
                   {order.status}
                 </Button>
               </td>
-              <td>${totalAmount}</td>
+              <td>${totalAmount === undefined ? 0 : totalAmount}</td>
               <td>
-                {order.deliveryTime === "" ? "----------" : order.deliveryTime}
+                {order.deliveredDate === null
+                  ? "----------"
+                  : formattedDate(order.deliveredDate)}
               </td>
               <td className="fw-bold pe-4">
                 <Link
