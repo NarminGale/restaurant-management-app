@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <Container>
       <header>
-        <h1 className="mb-0 fs-2">{title}</h1>
+        <h1 className="mb-0 fs-2 text-capitalize">{title}</h1>
       </header>
     </Container>
   );

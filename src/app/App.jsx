@@ -1,7 +1,10 @@
 import "./App.scss";
 
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
+import { pageTitleSlice } from "../features/pageTitle/pageTitleSlice";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Menu from "../pages/Menu";
@@ -13,6 +16,18 @@ import Dashboard from "../pages/Dashboard";
 import Sidebar from "../components/Sidebar";
 
 export default function App() {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const { pathname } = location;
+
+  useEffect(() => {
+    const title = pathname.slice(1);
+    dispatch(pageTitleSlice.actions.setTitle(title));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
   return (
     <Container fluid className="App vh-100">
       <Row className="vh-100">
@@ -25,7 +40,8 @@ export default function App() {
           </div>
           <div className="px-5 py-4 main-body">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route exact path="/" element={<Navigate to="/home" />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/orders" element={<Orders />} />

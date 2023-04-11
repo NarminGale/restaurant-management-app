@@ -20,10 +20,10 @@ export default function SidebarMenu() {
       className="sidebar position-fixed top-0 bottom-0 start-0 bg-body flex-column p-4"
       fixed="left"
     >
-      <Navbar.Brand href="/" className="align-self-center fw-bold fs-3">
+      <Navbar.Brand href="/home" className="align-self-center fw-bold fs-3">
         ALGO-TASK
       </Navbar.Brand>
-      <Nav defaultActiveKey="/" className="flex-column my-3 w-100">
+      <Nav defaultActiveKey="/home" className="flex-column my-3 w-100">
         {NAV_ITEMS.map((item) => (
           <NavLink
             key={item.name}

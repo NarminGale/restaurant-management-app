@@ -55,7 +55,16 @@ export default function Menu() {
 
       <Row>
         {categoryMeals?.meals.map((meal) => (
-          <Col xs={12} sm={12} md={12} lg={6} xl={4} xxl={3} className="px-3">
+          <Col
+            xs={12}
+            sm={12}
+            md={12}
+            lg={6}
+            xl={4}
+            xxl={3}
+            className="px-3"
+            key={meal.name}
+          >
             <MenuCard meal={meal} />
           </Col>
         ))}
