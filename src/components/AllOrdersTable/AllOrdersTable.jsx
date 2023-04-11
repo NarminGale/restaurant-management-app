@@ -13,6 +13,8 @@ import {
 export default function AllOrdersTable() {
   const { data: orders } = useGetOrdersQuery();
 
+  console.log(orders, "orders");
+
   return (
     <Table bordered hover className="data-table">
       <thead className="data-table--header">
@@ -22,17 +24,12 @@ export default function AllOrdersTable() {
           <th className="py-3">Waiter Name</th>
           <th className="py-3">Status</th>
           <th className="py-3">Amount</th>
-          <th className="py-3">Delivered Date</th>
+          <th className="py-3">Completed Date</th>
           <th className="py-3 pe-4">Info</th>
         </tr>
       </thead>
       <tbody>
         {orders?.map((order) => {
-          const totalAmount = order?.orderItems?.reduce(
-            (acc, item) => acc + item.amount,
-            0
-          );
-
           return (
             <tr key={order.id}>
               <td className="fw-bold ps-4">{order.id}</td>
@@ -47,7 +44,7 @@ export default function AllOrdersTable() {
                   {order.status}
                 </Button>
               </td>
-              <td>${totalAmount === undefined ? 0 : totalAmount}</td>
+              <td>${order.amount}</td>
               <td>
                 {order.deliveredDate === null
                   ? "-------------"

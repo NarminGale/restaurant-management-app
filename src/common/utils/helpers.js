@@ -36,3 +36,14 @@ export function getStatusButtonVariant(status) {
       return "light";
   }
 }
+
+export function getStatusTextVariant(status) {
+  switch (status) {
+    case "Pending":
+      return "text-black";
+    case "Served":
+      return "text-success";
+    default:
+      return "text-secondary";
+  }
+}

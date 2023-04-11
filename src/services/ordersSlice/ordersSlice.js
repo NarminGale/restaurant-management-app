@@ -27,6 +27,13 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ["Orders"],
     }),
+    deleteOrder: builder.mutation({
+      query: (id) => ({
+        url: `/orders/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Orders"],
+    }),
     getOrderById: builder.query({
       query: (id) => `/orders/${id}`,
       providesTags: ["Orders"],
@@ -41,10 +48,10 @@ export const ordersApi = createApi({
       },
     }),
     updateOrderItems: builder.mutation({
-      query: ({ id, orderItems }) => ({
+      query: ({ id, amount, orderItems }) => ({
         url: `/orders/${id}`,
         method: "PATCH",
-        body: { orderItems: orderItems },
+        body: { amount, orderItems: orderItems },
       }),
       invalidatesTags: ["Orders"],
     }),
@@ -53,8 +60,9 @@ export const ordersApi = createApi({
 
 export const {
   useGetOrdersQuery,
+  useAddOrderMutation,
+  useDeleteOrderMutation,
   useUpdateOrderMutation,
   useGetOrderByIdQuery,
-  useAddOrderMutation,
   useUpdateOrderItemsMutation,
 } = ordersApi;

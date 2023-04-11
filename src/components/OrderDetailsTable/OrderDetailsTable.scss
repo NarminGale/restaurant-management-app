@@ -1,6 +1,6 @@
 @import "../../assets/styles/variables";
 
-.data-table {
+.details-table {
   border-collapse: collapse;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
@@ -10,7 +10,7 @@
   }
 
   &--header {
-    background-color: $table-bg-color;
+    background-color: $table-bg-color-2;
     color: $table-text-color;
   }
 
@@ -29,9 +29,5 @@
     a {
       color: $table-text-color;
     }
-  }
-
-  .status-btn {
-    cursor: default;
   }
 }

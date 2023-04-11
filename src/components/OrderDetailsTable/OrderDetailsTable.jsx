@@ -8,74 +8,57 @@ import {
   useGetOrderByIdQuery,
   useUpdateOrderItemsMutation,
 } from "../../services/ordersSlice/ordersSlice";
-import { padZero } from "../../common/utils/helpers";
+import { padZero, getStatusTextVariant } from "../../common/utils/helpers";
 
 export default function OrderDetailsTable() {
   const { orderId } = useParams();
 
-  // get order by id
   const { data: order } = useGetOrderByIdQuery(orderId);
-
   const [updateOrderItems] = useUpdateOrderItemsMutation();
-  const handleDeleteOrder = async (id) => {
-    const newOrderItems = order.orderItems.map((item) => {
-      console.log(item, "item");
-      if (item.orderId === id) {
-        return { ...item, status: "Cancelled", waitingTime: "cancelled" };
-      } else {
-        return item;
-      }
-    });
 
-    // const orderItemCounts = newOrderItems.length;
-
-    /*    const acceptedOrderItems = newOrderItems.filter(
-          (item) => item?.status === "Accepted"
-        ).length;
-
-        const cancelledOrderItems = newOrderItems.filter(
-          (item) => item?.status === "Cancelled"
-        ).length;*/
-    /*
-        const orderStatus =
-          orderItemCounts === acceptedOrderItems
-            ? "Delivered"
-            : orderItemCounts === cancelledOrderItems
-            ? "Cancelled"
-            : "Pending";*/
-
-    await updateOrderItems({
-      id: order.id,
-      orderItems: newOrderItems,
-    });
-  };
   const dateDiff = (startDate, endDate = new Date()) => {
     const diffInMs = endDate.getTime() - startDate.getTime();
-    return Math.floor(diffInMs / (1000 * 60));
+    return Math.round(diffInMs / (1000 * 60));
   };
-  const handleServeOrder = async (id) => {
-    const newOrderItems = order.orderItems.map((item) => {
-      console.log(item, "item");
-      if (item.orderId === id) {
-        return {
-          ...item,
-          status: "Served",
-          waitingTime: dateDiff(new Date(item.orderTime)),
-        };
-      } else {
-        return item;
-      }
-    });
+
+  const handleActionButtonClick = async (id, action) => {
+    const newOrderItems = order.orderItems.map((item) =>
+      item.orderId === id
+        ? {
+            ...item,
+            status: action === "serve" ? "Served" : "Cancelled",
+            waitingTime:
+              action === "serve"
+                ? dateDiff(new Date(item.orderTime))
+                : "cancelled",
+          }
+        : item
+    );
+
+    const totalAmount = newOrderItems.reduce(
+      (acc, item) => (item.status === "Served" ? acc + item.amount : acc),
+      0
+    );
 
     await updateOrderItems({
       id: order.id,
+      amount: totalAmount,
       orderItems: newOrderItems,
     });
+
+    console.log(
+      {
+        id: order.id,
+        amount: totalAmount,
+        orderItems: newOrderItems,
+      },
+      "updateOrderItems"
+    );
   };
 
   return (
-    <Table bordered hover className="data-table">
-      <thead className="data-table--header">
+    <Table bordered hover className="details-table">
+      <thead className="details-table--header">
         <tr>
           <th className="py-3 ps-4">Id</th>
           <th className="py-3">Meal Name</th>
@@ -95,6 +78,11 @@ export default function OrderDetailsTable() {
             const orderTime =
               padZero(newDate.getHours()) + ":" + padZero(newDate.getMinutes());
 
+            const waitingTime =
+              typeof meal.waitingTime === "number"
+                ? `${meal.waitingTime} ${meal.waitingTime > 1 ? "mins" : "min"}`
+                : meal.waitingTime;
+
             return (
               <tr key={meal.orderId}>
                 <td className="fw-bold ps-4">{meal.orderId}</td>
@@ -102,26 +90,42 @@ export default function OrderDetailsTable() {
                 <td>{meal.quantity}</td>
                 <td>${meal.amount}</td>
                 <td>{orderTime}</td>
-                <td>{meal.waitingTime}</td>
-                <td>{meal.status}</td>
+                <td>{waitingTime}</td>
+                <td>
+                  <small className={getStatusTextVariant(meal.status)}>
+                    {meal.status}
+                  </small>
+                </td>
                 <td>
                   <div className="d-flex gap-3 align-items-center">
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="border-0 status-btn"
-                      onClick={() => handleDeleteOrder(meal.orderId)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="success"
-                      className="border-0 status-btn"
-                      onClick={() => handleServeOrder(meal.orderId)}
-                    >
-                      Serve
-                    </Button>
+                    {meal.status === "Pending" ? (
+                      <>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          className="border-0"
+                          onClick={() =>
+                            handleActionButtonClick(meal.orderId, "cancel")
+                          }
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="success"
+                          className="border-0"
+                          onClick={() =>
+                            handleActionButtonClick(meal.orderId, "serve")
+                          }
+                        >
+                          Serve
+                        </Button>
+                      </>
+                    ) : (
+                      <div className="text-decoration-underline">
+                        {meal.status}
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>
