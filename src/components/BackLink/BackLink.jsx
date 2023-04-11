@@ -1,4 +1,5 @@
-import React from "react";
+import "./BackLink.scss";
+
 import { Link } from "react-router-dom";
 import arrowLeft from "../../assets/svg-icons/arrow-left.svg";
 

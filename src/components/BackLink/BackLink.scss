@@ -1,0 +1,16 @@
+.left-arrow {
+  &--icon {
+    width: 25px;
+    height: 25px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &:hover {
+    .left-arrow--text {
+      border-bottom: 1px solid black;
+    }
+  }
+}
