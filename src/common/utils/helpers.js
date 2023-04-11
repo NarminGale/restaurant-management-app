@@ -23,3 +23,16 @@ export function formattedDate(date) {
 
   return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 }
+
+export function getStatusButtonVariant(status) {
+  switch (status) {
+    case "Pending":
+      return "warning";
+    case "Delivered":
+      return "success";
+    case "Cancelled":
+      return "secondary";
+    default:
+      return "light";
+  }
+}
