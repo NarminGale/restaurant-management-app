@@ -33,7 +33,7 @@ To run the project locally, follow these steps:
 3. Start the development server: `npm start`
 4. Open the browser and go to `http://localhost:3000`
 5. Start the API json server by running the following command in a new terminal window: `json-server --watch data/api.json --port 3500` 
-6. To view the API, open the browser and go to `http://localhost:3500`
+6. To view the API, open the browser and go to `http://localhost:3500/orders`
 
 ## Usage
 
