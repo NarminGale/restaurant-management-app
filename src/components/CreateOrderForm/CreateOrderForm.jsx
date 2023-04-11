@@ -1,6 +1,7 @@
 import "./CreateOrderForm.scss";
 
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import FormLabel from "../form/FormLabel";
 import FormError from "../form/FormError";
@@ -8,8 +9,14 @@ import FormButton from "../form/FormButton";
 import FormSelectBox from "../form/FormSelectBox";
 import { useGetWaitersQuery } from "../../services/waitersSlice/waitersSlice";
 import { useGetTableNumbersQuery } from "../../services/tableNumbersSlice/tableNumbersSlice";
-import { useAddOrderMutation } from "../../services/ordersSlice/ordersSlice";
-export default function CreateOrderForm({ handleShowCreateOrder }) {
+import {
+  useAddOrderMutation,
+  useUpdateOrderMutation,
+} from "../../services/ordersSlice/ordersSlice";
+
+export default function CreateOrderForm() {
+  const navigate = useNavigate();
+
   const {
     control,
     watch,
@@ -19,7 +26,9 @@ export default function CreateOrderForm({ handleShowCreateOrder }) {
 
   const { data: waiters } = useGetWaitersQuery();
   const { data: tableNumbers } = useGetTableNumbersQuery();
+
   const [addOrder] = useAddOrderMutation();
+  const [updateOrder] = useUpdateOrderMutation();
 
   const NameSelectBox = watch("NameSelectBox");
   const TableNumSelectBox = watch("TableNumSelectBox");
@@ -38,25 +47,25 @@ export default function CreateOrderForm({ handleShowCreateOrder }) {
       requiredText: "Table number is required",
     },
   ];
-  /*
-  console.log(TableNumSelectBox, "TableNumSelectBox");
-  console.log(NameSelectBox, "NameSelectBox");*/
-  const onSubmit = (data) => {
+
+  const onSubmit = async () => {
     if (!NameSelectBox || !TableNumSelectBox) return;
 
-    const newOrder = {
+    const { data } = await addOrder({});
+
+    const order = {
       waiter: NameSelectBox,
       tableNumber: TableNumSelectBox,
-      // status: "Pending",
-      // amount: 0.0,
-      // deliveredDate: new Date().toISOString(),
+      status: "Pending",
+      amount: 0.0,
+      deliveredDate: null,
     };
 
-    addOrder(newOrder);
+    const updatedOrder = { ...data, ...order };
 
-    handleShowCreateOrder(false);
+    await updateOrder(updatedOrder);
 
-    console.log(data, "data");
+    navigate(`/orders/${updatedOrder.id}`);
   };
 
   return (
