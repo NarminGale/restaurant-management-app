@@ -1,44 +1,21 @@
 import "./NewOrder.scss";
 
-import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 
+import BackLink from "../../components/BackLink";
 import CreateOrderForm from "../../components/CreateOrderForm";
-import AddOrderForm from "../../components/AddOrderForm";
-import arrowLeft from "../../assets/svg-icons/arrow-left.svg";
-import { useState } from "react";
 
 export default function NewOrder() {
-  const [showCreateOrder, setShowCreateOrder] = useState(true);
-
-  const handleShowCreateOrder = (flag) => setShowCreateOrder(flag);
-
   return (
     <Container className="px-5 py-4 d-flex flex-column gap-5">
       <Row>
         <Col>
-          <Link
-            to="/orders"
-            className="left-arrow text-decoration-none text-black"
-          >
-            <span className="d-inline-block left-arrow--icon me-2">
-              <img
-                src={arrowLeft}
-                alt="arrow left icon"
-                className="w-100 h-100"
-              />
-            </span>
-            <span className="left-arrow--text py-1">Back to orders</span>
-          </Link>
+          <BackLink />
         </Col>
       </Row>
       <Row>
         <Col>
-          {showCreateOrder ? (
-            <CreateOrderForm handleShowCreateOrder={handleShowCreateOrder} />
-          ) : (
-            <AddOrderForm />
-          )}
+          <CreateOrderForm />
         </Col>
       </Row>
     </Container>
