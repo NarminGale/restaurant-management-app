@@ -9,6 +9,7 @@ export const ordersApi = createApi({
   endpoints: (builder) => ({
     getOrders: builder.query({
       query: () => "/orders",
+      transformResponse: (res) => res.sort((a, b) => b.id - a.id),
       providesTags: ["Orders"],
     }),
     addOrder: builder.mutation({

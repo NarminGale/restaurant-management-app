@@ -9,11 +9,22 @@ import {
   formattedDate,
   getStatusButtonVariant,
 } from "../../common/utils/helpers";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ordersAmountSlice } from "../../features/ordersAmount/ordersAmountSlice";
 
 export default function AllOrdersTable() {
+  const dispatch = useDispatch();
+
   const { data: orders } = useGetOrdersQuery();
 
-  console.log(orders, "orders");
+  useEffect(() => {
+    console.log(orders, "orders");
+    const ordersAmount = orders?.reduce((acc, order) => acc + order.amount, 0);
+    dispatch(ordersAmountSlice.actions.setAmount(ordersAmount));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orders]);
 
   return (
     <Table bordered hover className="data-table">
@@ -29,10 +40,10 @@ export default function AllOrdersTable() {
         </tr>
       </thead>
       <tbody>
-        {orders?.map((order) => {
+        {orders?.map((order, index) => {
           return (
             <tr key={order.id}>
-              <td className="fw-bold ps-4">{order.id}</td>
+              <td className="fw-bold ps-4">{++index}</td>
               <td>{order.tableNumber}</td>
               <td>{order.waiter}</td>
               <td>

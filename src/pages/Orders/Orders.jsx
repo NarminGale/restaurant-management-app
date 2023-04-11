@@ -5,9 +5,12 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 
 import AllOrdersTable from "../../components/AllOrdersTable";
 import shoppingCart from "../../assets/svg-icons/cart-fill.svg";
+import { useSelector } from "react-redux";
 export default function Orders() {
   const url = useHref(undefined, undefined);
   const newOrderUrl = `${url}/new`;
+
+  const amount = useSelector((state) => state.ordersAmount.amount);
 
   return (
     <Container className="py-3">
@@ -30,6 +33,15 @@ export default function Orders() {
       <Row>
         <Col>
           <AllOrdersTable />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col xs={6}>
+          <h3>Amount sum:</h3>
+        </Col>
+        <Col xs={6}>
+          <h2>$ {amount}</h2>
         </Col>
       </Row>
     </Container>
