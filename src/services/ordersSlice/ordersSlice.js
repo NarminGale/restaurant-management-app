@@ -9,7 +9,17 @@ export const ordersApi = createApi({
   endpoints: (builder) => ({
     getOrders: builder.query({
       query: () => "/orders",
-      transformResponse: (res) => res.sort((a, b) => b.id - a.id),
+      transformResponse: (res) => {
+        return res.sort((a, b) => {
+          if (a.status === "Pending" && b.status !== "Pending") {
+            return -1;
+          } else if (b.status === "Pending" && a.status !== "Pending") {
+            return 1;
+          } else {
+            return b.id - a.id;
+          }
+        });
+      },
       providesTags: ["Orders"],
     }),
     addOrder: builder.mutation({
