@@ -3,7 +3,7 @@ import "./Orders.scss";
 import { Link, useHref } from "react-router-dom";
 import { Col, Container, Row, Button } from "react-bootstrap";
 
-import DataTable from "../../components/DataTable";
+import AllOrdersTable from "../../components/AllOrdersTable";
 import shoppingCart from "../../assets/svg-icons/cart-fill.svg";
 export default function Orders() {
   const url = useHref(undefined, undefined);
@@ -29,7 +29,7 @@ export default function Orders() {
 
       <Row>
         <Col>
-          <DataTable />
+          <AllOrdersTable />
         </Col>
       </Row>
     </Container>

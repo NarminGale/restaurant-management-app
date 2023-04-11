@@ -1,14 +1,21 @@
 import "./AddOrderForm.scss";
 
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 import FormLabel from "../form/FormLabel";
 import FormError from "../form/FormError";
 import FormInput from "../form/FormInput";
 import FormButton from "../form/FormButton";
 import MultiDropdown from "../MultiDropdown/MultiDropdown";
+import {
+  useGetOrderByIdQuery,
+  useUpdateOrderItemsMutation,
+} from "../../services/ordersSlice/ordersSlice";
 
 export default function AddOrderForm() {
+  const { orderId } = useParams();
+
   const {
     control,
     watch,
@@ -16,16 +23,37 @@ export default function AddOrderForm() {
     formState: { errors },
   } = useForm();
 
+  const { data: order } = useGetOrderByIdQuery(orderId);
+  const [updateOrderItems] =
+    useUpdateOrderItemsMutation();
+
   const selectedOption = watch("selectField");
   const number = watch("number");
 
-  const price = selectedOption?.value.price || 0;
+  const price = selectedOption?.value?.price || 0;
 
   // calculate total price
   const totalPrice = number > 0 ? price * number : 0;
 
-  const onSubmit = (data) => {
-    console.log(data, "data");
+  const onSubmit = async () => {
+    if (!selectedOption || !number) return;
+
+    const newOrderItem = {
+      name: selectedOption.label,
+      quantity: number,
+      amount: totalPrice,
+      orderTime: new Date(),
+      status: "Pending",
+      waitingTime: null,
+    };
+
+    if (order?.orderItems) {
+      const newOrderItems = [...order?.orderItems, newOrderItem];
+
+      updateOrderItems({ id: order?.id, orderItems: newOrderItems });
+    } else {
+      updateOrderItems({ id: order?.id, orderItems: [newOrderItem] });
+    }
   };
 
   return (

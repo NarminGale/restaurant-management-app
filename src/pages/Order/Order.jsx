@@ -1,19 +1,43 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+
+import Button from "react-bootstrap/Button";
+
+import BackLink from "../../components/BackLink";
+import AddOrderForm from "../../components/AddOrderForm";
+import OrderDetailsTable from "../../components/OrderDetailsTable";
 
 export default function Order() {
-  const { orderId } = useParams();
-
-  console.log(orderId, "orderId");
   return (
-    <Container className="p-5">
+    <Container className="px-5 py-4 d-flex flex-column gap-5">
       <Row>
         <Col>
-          <Link to="/orders">Back to orders</Link>
+          <BackLink />
         </Col>
       </Row>
       <Row>
-        <Col>{orderId} yess</Col>
+        <Col>
+          <AddOrderForm />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <OrderDetailsTable />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={6}>
+          <h3>Amount sum</h3>
+        </Col>
+        <Col xs={6}>
+          <h3>$33</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="d-flex justify-content-end align-items-end">
+          <Button variant="danger" size="lg" className="border-0">
+            Complete Order
+          </Button>
+        </Col>
       </Row>
     </Container>
   );
