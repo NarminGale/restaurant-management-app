@@ -1,4 +1,4 @@
-import "./DataTable.scss";
+import "./AllOrdersTable.scss";
 
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
@@ -10,7 +10,7 @@ import {
   getStatusButtonVariant,
 } from "../../common/utils/helpers";
 
-export default function DataTable() {
+export default function AllOrdersTable() {
   const { data: orders } = useGetOrdersQuery();
 
   return (
@@ -50,7 +50,7 @@ export default function DataTable() {
               <td>${totalAmount === undefined ? 0 : totalAmount}</td>
               <td>
                 {order.deliveredDate === null
-                  ? "----------"
+                  ? "-------------"
                   : formattedDate(order.deliveredDate)}
               </td>
               <td className="fw-bold pe-4">
