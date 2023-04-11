@@ -1,17 +1,17 @@
 import "./AllOrdersTable.scss";
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
-import { useGetOrdersQuery } from "../../services/ordersSlice/ordersSlice";
 import {
   formattedDate,
   getStatusButtonVariant,
 } from "../../common/utils/helpers";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { ordersAmountSlice } from "../../features/ordersAmount/ordersAmountSlice";
+import { useGetOrdersQuery } from "../../services/ordersSlice/ordersSlice";
+import { totalOrdersSlice } from "../../features/totalOrders/totalOrdersSlice";
 
 export default function AllOrdersTable() {
   const dispatch = useDispatch();
@@ -20,8 +20,10 @@ export default function AllOrdersTable() {
 
   useEffect(() => {
     console.log(orders, "orders");
+    dispatch(totalOrdersSlice.actions.setQuantity(orders?.length));
+
     const ordersAmount = orders?.reduce((acc, order) => acc + order.amount, 0);
-    dispatch(ordersAmountSlice.actions.setAmount(ordersAmount));
+    dispatch(totalOrdersSlice.actions.setAmount(ordersAmount));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders]);

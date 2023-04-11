@@ -10,8 +10,9 @@ export default function Orders() {
   const url = useHref(undefined, undefined);
   const newOrderUrl = `${url}/new`;
 
-  const amount = useSelector((state) => state.ordersAmount.amount);
+  const amount = useSelector((state) => state.totalOrders.amount);
 
+  console.log(useSelector((state) => state));
   return (
     <Container className="py-3">
       <Row>
