@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Loader from "../../common/spinner/Loader";
 import MenuCard from "../../components/MenuCard";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import {
@@ -22,53 +23,59 @@ export default function Menu() {
     error: categoryMealsError,
   } = useGetCategoryMealsQuery(selectedCategory);
 
-  if (categoriesLoading || categoryMealsLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (categoriesError || categoryMealsError) {
     return <div>Error: {categoriesError?.message}</div>;
   }
 
   return (
     <Container className="py-1">
-      <Row>
-        <Col>
-          <div className="d-flex flex-wrap justify-content-evenly align-items-center mb-5">
-            {categories?.map((category) => (
-              <Button
-                variant={
-                  selectedCategory === category.id
-                    ? "warning"
-                    : "outline-warning"
-                }
-                key={category.id}
-                className="text-black"
-                onClick={() => setSelectedCategory(category.id)}
-              >
-                <h3 className="fw-bold">{category.name}</h3>
-              </Button>
-            ))}
-          </div>
-        </Col>
-      </Row>
-
-      <Row>
-        {categoryMeals?.meals.map((meal) => (
-          <Col
-            xs={12}
-            sm={12}
-            md={12}
-            lg={6}
-            xl={4}
-            xxl={3}
-            className="px-3"
-            key={meal.name}
-          >
-            <MenuCard meal={meal} />
+      {categoriesLoading || categoryMealsLoading ? (
+        <Row>
+          <Col className="d-flex justify-content-center align-items-center">
+            <Loader />
           </Col>
-        ))}
-      </Row>
+        </Row>
+      ) : (
+        <>
+          <Row>
+            <Col>
+              <div className="d-flex flex-wrap justify-content-evenly align-items-center mb-5">
+                {categories?.map((category) => (
+                  <Button
+                    variant={
+                      selectedCategory === category.id
+                        ? "warning"
+                        : "outline-warning"
+                    }
+                    key={category.id}
+                    className="text-black"
+                    onClick={() => setSelectedCategory(category.id)}
+                  >
+                    <h3 className="fw-bold">{category.name}</h3>
+                  </Button>
+                ))}
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            {categoryMeals?.meals.map((meal) => (
+              <Col
+                xs={12}
+                sm={12}
+                md={12}
+                lg={6}
+                xl={4}
+                xxl={3}
+                className="px-3"
+                key={meal.name}
+              >
+                <MenuCard meal={meal} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      )}
     </Container>
   );
 }

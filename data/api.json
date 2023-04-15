@@ -62,27 +62,6 @@
           "imgUrl": "/images/Toyuq_salat.jpg"
         }
       ]
-    },
-    {
-      "id": 4,
-      "name": "Kebab",
-      "meals": [
-        {
-          "name": "Chicken Wins Kebab",
-          "price": 8.5,
-          "imgUrl": "/images/TOYUQ_QANAD_KABABI.jpg"
-        },
-        {
-          "name": "Lamb kebab",
-          "price": 12,
-          "imgUrl": "/images/QUZU_KABAB.jpg"
-        },
-        {
-          "name": "Beef shish kebab",
-          "price": 17.5,
-          "imgUrl": "/images/DANA__KABAB.jpg"
-        }
-      ]
     }
   ],
   "orders": [
@@ -148,52 +127,6 @@
           "status": "Cancelled",
           "waitingTime": "cancelled",
           "orderId": 2
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "waiter": "Juan",
-      "tableNumber": "16",
-      "status": "Delivered",
-      "amount": 20,
-      "deliveredDate": "2023-04-11T06:19:32.772Z",
-      "orderItems": [
-        {
-          "name": "Chicken Wins Kebab",
-          "quantity": 1,
-          "amount": 8.5,
-          "orderTime": "2023-04-11T06:18:38.396Z",
-          "status": "Served",
-          "waitingTime": 1,
-          "orderId": 1
-        },
-        {
-          "name": "Meat Fajitas",
-          "quantity": 1,
-          "amount": 22.5,
-          "orderTime": "2023-04-11T06:18:41.288Z",
-          "status": "Cancelled",
-          "waitingTime": "cancelled",
-          "orderId": 2
-        },
-        {
-          "name": "Tomato Soup",
-          "quantity": 1,
-          "amount": 6,
-          "orderTime": "2023-04-11T06:18:44.239Z",
-          "status": "Served",
-          "waitingTime": 1,
-          "orderId": 3
-        },
-        {
-          "name": "Lentil Soup",
-          "quantity": 1,
-          "amount": 5.5,
-          "orderTime": "2023-04-11T06:18:47.262Z",
-          "status": "Served",
-          "waitingTime": 1,
-          "orderId": 4
         }
       ]
     }
